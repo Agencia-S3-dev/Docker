@@ -1,8 +1,8 @@
-#server {
-#    listen 80;
-#    server_name laravel.com.co;
-#    return 301 https://laravel.com.co$request_uri;
-#}
+server {
+    listen 80;
+    server_name hostname.test;
+    return 301 https://hostname.test$request_uri;
+}
 
 server {
 
@@ -10,13 +10,13 @@ server {
     listen [::]:80;
 
     # For https
-    # listen 443 ssl;
-    # listen [::]:443 ssl ipv6only=on;
-    # ssl_certificate /etc/nginx/ssl/default.crt;
-    # ssl_certificate_key /etc/nginx/ssl/default.key;
+    listen 443 ssl;
+    listen [::]:443 ssl ipv6only=on;
+    ssl_certificate /etc/nginx/ssl/default.crt;
+    ssl_certificate_key /etc/nginx/ssl/default.key;
 
-    server_name laravel.test;
-    root /var/www/laravel/public;
+    server_name hostname.test;
+    root /var/www/hostname/public;
     index index.php index.html index.htm;
 
     location / {
@@ -44,6 +44,6 @@ server {
         log_not_found off;
     }
 
-    error_log /var/log/nginx/laravel_error.log;
-    access_log /var/log/nginx/laravel_access.log;
+    error_log /var/log/nginx/hostname_error.log;
+    access_log /var/log/nginx/hostname_access.log;
 }

@@ -1,10 +1,9 @@
 .idea
 /logs
-/data
+.data
 .env
 /.project
 .docker-sync
-/jenkins/jenkins_home
 
 /logstash/pipeline/*.conf
 /logstash/config/pipelines.yml
@@ -12,11 +11,6 @@
 /nginx/ssl/*.crt
 /nginx/ssl/*.key
 /nginx/ssl/*.csr
-
-/apache2/ssl/*.crt
-/apache2/ssl/*.key
-/apache2/ssl/*.csr
-/apache2/ssl/*.org
 
 /.devcontainer/*
 !/.devcontainer/devcontainer.example.json
