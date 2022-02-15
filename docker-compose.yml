@@ -8,8 +8,6 @@ networks:
 volumes:
   mysql:
     driver: ${VOLUMES_DRIVER}
-  mongo:
-    driver: ${VOLUMES_DRIVER}
   postgres:
     driver: ${VOLUMES_DRIVER}
   redis:
@@ -19,10 +17,6 @@ volumes:
   phpmyadmin:
     driver: ${VOLUMES_DRIVER}
   elasticsearch:
-    driver: ${VOLUMES_DRIVER}
-  sonarqube:
-    driver: ${VOLUMES_DRIVER}
-  graylog:
     driver: ${VOLUMES_DRIVER}
   docker-in-docker:
     driver: ${VOLUMES_DRIVER}
@@ -98,16 +92,12 @@ services:
           - INSTALL_TAINT=${WORKSPACE_INSTALL_TAINT}
           - INSTALL_LIBPNG=${WORKSPACE_INSTALL_LIBPNG}
           - INSTALL_GRAPHVIZ=${WORKSPACE_INSTALL_GRAPHVIZ}
-          - INSTALL_IONCUBE=${WORKSPACE_INSTALL_IONCUBE}
           - INSTALL_MYSQL_CLIENT=${WORKSPACE_INSTALL_MYSQL_CLIENT}
           - INSTALL_PING=${WORKSPACE_INSTALL_PING}
           - INSTALL_SSHPASS=${WORKSPACE_INSTALL_SSHPASS}
           - INSTALL_INOTIFY=${WORKSPACE_INSTALL_INOTIFY}
           - INSTALL_FSWATCH=${WORKSPACE_INSTALL_FSWATCH}
           - INSTALL_AST=${WORKSPACE_INSTALL_AST}
-          - INSTALL_YAML=${WORKSPACE_INSTALL_YAML}
-          - INSTALL_RDKAFKA=${WORKSPACE_INSTALL_RDKAFKA}
-          - INSTALL_MAILPARSE=${WORKSPACE_INSTALL_MAILPARSE}
           - INSTALL_GIT_PROMPT=${WORKSPACE_INSTALL_GIT_PROMPT}
           - INSTALL_XMLRPC=${WORKSPACE_INSTALL_XMLRPC}
           - PUID=${WORKSPACE_PUID}
@@ -123,16 +113,11 @@ services:
           - INSTALL_SUPERVISOR=${WORKSPACE_INSTALL_SUPERVISOR}
           - INSTALL_FFMPEG=${WORKSPACE_INSTALL_FFMPEG}
           - INSTALL_AUDIOWAVEFORM=${WORKSPACE_INSTALL_AUDIOWAVEFORM}
-          - INSTALL_WKHTMLTOPDF=${WORKSPACE_INSTALL_WKHTMLTOPDF}
           - INSTALL_GNU_PARALLEL=${WORKSPACE_INSTALL_GNU_PARALLEL}
           - INSTALL_LNAV=${WORKSPACE_INSTALL_LNAV}
           - INSTALL_PROTOC=${WORKSPACE_INSTALL_PROTOC}
           - INSTALL_PHPDECIMAL=${WORKSPACE_INSTALL_PHPDECIMAL}
-          - INSTALL_ZOOKEEPER=${WORKSPACE_INSTALL_ZOOKEEPER}
-          - INSTALL_SSDB=${WORKSPACE_INSTALL_SSDB}
-          - INSTALL_TRADER=${WORKSPACE_INSTALL_TRADER}
           - PROTOC_VERSION=${WORKSPACE_PROTOC_VERSION}
-          - INSTALL_DOCKER_CLIENT=${WORKSPACE_INSTALL_DOCKER_CLIENT}
           - INSTALL_MEMCACHED=${WORKSPACE_INSTALL_MEMCACHED}
           - http_proxy
           - https_proxy
@@ -149,7 +134,6 @@ services:
         - "${WORKSPACE_BROWSERSYNC_UI_HOST_PORT}:3001"
         - "${WORKSPACE_VUE_CLI_SERVE_HOST_PORT}:8080"
         - "${WORKSPACE_VUE_CLI_UI_HOST_PORT}:8000"
-        - "${WORKSPACE_ANGULAR_CLI_SERVE_HOST_PORT}:4200"
       tty: true
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
@@ -208,34 +192,25 @@ services:
           - INSTALL_IMAGEMAGICK=${PHP_FPM_INSTALL_IMAGEMAGICK}
           - INSTALL_CALENDAR=${PHP_FPM_INSTALL_CALENDAR}
           - INSTALL_FAKETIME=${PHP_FPM_INSTALL_FAKETIME}
-          - INSTALL_IONCUBE=${PHP_FPM_INSTALL_IONCUBE}
           - INSTALL_APCU=${PHP_FPM_INSTALL_APCU}
           - INSTALL_CACHETOOL=${PHP_FPM_INSTALL_CACHETOOL}
-          - INSTALL_YAML=${PHP_FPM_INSTALL_YAML}
-          - INSTALL_RDKAFKA=${PHP_FPM_INSTALL_RDKAFKA}
           - INSTALL_GETTEXT=${PHP_FPM_INSTALL_GETTEXT}
           - INSTALL_ADDITIONAL_LOCALES=${PHP_FPM_INSTALL_ADDITIONAL_LOCALES}
           - INSTALL_MYSQL_CLIENT=${PHP_FPM_INSTALL_MYSQL_CLIENT}
           - INSTALL_PING=${PHP_FPM_INSTALL_PING}
           - INSTALL_SSHPASS=${PHP_FPM_INSTALL_SSHPASS}
-          - INSTALL_MAILPARSE=${PHP_FPM_INSTALL_MAILPARSE}
           - INSTALL_PCNTL=${PHP_FPM_INSTALL_PCNTL}
           - ADDITIONAL_LOCALES=${PHP_FPM_ADDITIONAL_LOCALES}
           - INSTALL_FFMPEG=${PHP_FPM_FFMPEG}
           - INSTALL_AUDIOWAVEFORM=${PHP_FPM_AUDIOWAVEFORM}
-          - INSTALL_WKHTMLTOPDF=${PHP_FPM_INSTALL_WKHTMLTOPDF}
           - INSTALL_XHPROF=${PHP_FPM_INSTALL_XHPROF}
           - INSTALL_XMLRPC=${PHP_FPM_INSTALL_XMLRPC}
           - INSTALL_PHPDECIMAL=${PHP_FPM_INSTALL_PHPDECIMAL}
-          - INSTALL_ZOOKEEPER=${PHP_FPM_INSTALL_ZOOKEEPER}
-          - INSTALL_SSDB=${PHP_FPM_INSTALL_SSDB}
-          - INSTALL_TRADER=${PHP_FPM_INSTALL_TRADER}
           - DOWNGRADE_OPENSSL_TLS_AND_SECLEVEL=${PHP_DOWNGRADE_OPENSSL_TLS_AND_SECLEVEL}
           - PUID=${PHP_FPM_PUID}
           - PGID=${PHP_FPM_PGID}
           - IMAGEMAGICK_VERSION=${PHP_FPM_IMAGEMAGICK_VERSION}
           - LOCALE=${PHP_FPM_DEFAULT_LOCALE}
-          - INSTALL_DOCKER_CLIENT=${PHP_FPM_INSTALL_DOCKER_CLIENT}
           - http_proxy
           - https_proxy
           - no_proxy
@@ -282,7 +257,6 @@ services:
           - INSTALL_BCMATH=${PHP_FPM_INSTALL_BCMATH}
           - INSTALL_MEMCACHED=${PHP_FPM_INSTALL_MEMCACHED}
           - INSTALL_SOCKETS=${LARAVEL_HORIZON_INSTALL_SOCKETS}
-          - INSTALL_YAML=${LARAVEL_HORIZON_INSTALL_YAML}
           - INSTALL_CASSANDRA=${LARAVEL_HORIZON_INSTALL_CASSANDRA}
           - INSTALL_PHPREDIS=${LARAVEL_HORIZON_INSTALL_PHPREDIS}
           - INSTALL_MONGO=${LARAVEL_HORIZON_INSTALL_MONGO}
@@ -365,20 +339,7 @@ services:
         - "${MYSQL_PORT}:3306"
       networks:
         - backend
-### MongoDB ##############################################
-    mongo:
-      build: ./mongo
-      hostname: mongo
-      ports:
-        - "${MONGODB_PORT}:27017"
-      environment:
-        - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
-        - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
-      volumes:
-        - ${DATA_PATH_HOST}/mongo:/data/db
-        - ${DATA_PATH_HOST}/mongo_config:/data/configdb
-      networks:
-        - backend
+
 ### PostgreSQL ###########################################
     postgres:
       build:
@@ -395,7 +356,6 @@ services:
         - POSTGRES_DB=${POSTGRES_DB}
         - POSTGRES_USER=${POSTGRES_USER}
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-        - SONARQUBE_POSTGRES_INIT=${SONARQUBE_POSTGRES_INIT}
         - SONARQUBE_POSTGRES_DB=${SONARQUBE_POSTGRES_DB}
         - SONARQUBE_POSTGRES_USER=${SONARQUBE_POSTGRES_USER}
         - SONARQUBE_POSTGRES_PASSWORD=${SONARQUBE_POSTGRES_PASSWORD}
@@ -411,26 +371,6 @@ services:
       ports:
         - "${REDIS_PORT}:6379"
       networks:
-        - backend
-
-### phpMyAdmin ###########################################
-    phpmyadmin:
-      build: ./phpmyadmin
-      hostname: phpmyadmin
-      environment:
-        - PMA_ARBITRARY=1
-        - MYSQL_USER=${PMA_USER}
-        - MYSQL_PASSWORD=${PMA_PASSWORD}
-        - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
-        - MAX_EXECUTION_TIME=${PMA_MAX_EXECUTION_TIME}
-        - MEMORY_LIMIT=${PMA_MEMORY_LIMIT}
-        - UPLOAD_LIMIT=${PMA_UPLOAD_LIMIT}
-      ports:
-        - "${PMA_PORT}:80"
-      depends_on:
-        - "${PMA_DB_ENGINE}"
-      networks:
-        - frontend
         - backend
 
 ### ElasticSearch ########################################
@@ -474,37 +414,6 @@ services:
         - /dev/shm:/dev/shm
       networks:
         - frontend
-
-### Graylog ##############################################
-    graylog:
-      build: ./graylog
-      hostname: graylog
-      environment:
-        - GRAYLOG_PASSWORD_SECRET=${GRAYLOG_PASSWORD}
-        - GRAYLOG_ROOT_PASSWORD_SHA2=${GRAYLOG_SHA256_PASSWORD}
-        - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:${GRAYLOG_PORT}/
-      links:
-        - mongo
-        - elasticsearch
-      depends_on:
-        - mongo
-        - elasticsearch
-      ports:
-        # Graylog web interface and REST API
-        - ${GRAYLOG_PORT}:9000
-        # Syslog TCP
-        - ${GRAYLOG_SYSLOG_TCP_PORT}:514
-        # Syslog UDP
-        - ${GRAYLOG_SYSLOG_UDP_PORT}:514/udp
-        # GELF TCP
-        - ${GRAYLOG_GELF_TCP_PORT}:12201
-        # GELF UDP
-        - ${GRAYLOG_GELF_UDP_PORT}:12201/udp
-      user: graylog
-      volumes:
-        - ${DATA_PATH_HOST}/graylog:/usr/share/graylog/data
-      networks:
-        - backend
 
 ### Laravel Echo Server ##################################
     laravel-echo-server:
@@ -671,29 +580,6 @@ services:
         - "${REDIS_WEBUI_PORT}:80"
       depends_on:
         - redis
-
-### SONARQUBE ############################################
-    sonarqube:
-      build:
-        context: ./sonarqube
-      hostname: "${SONARQUBE_HOSTNAME}"
-      volumes:
-        - ${DATA_PATH_HOST}/sonarqube/conf:/opt/sonarqube/conf
-        - ${DATA_PATH_HOST}/sonarqube/data:/opt/sonarqube/data
-        - ${DATA_PATH_HOST}/sonarqube/logs:/opt/sonarqube/logs
-        - ${DATA_PATH_HOST}/sonarqube/extensions:/opt/sonarqube/extensions
-        - ${DATA_PATH_HOST}/sonarqube/plugins:/opt/sonarqube/lib/bundled-plugins
-      ports:
-        - ${SONARQUBE_PORT}:9000
-      depends_on:
-        - postgres
-      environment:
-        - sonar.jdbc.username=${SONARQUBE_POSTGRES_USER}
-        - sonar.jdbc.password=${SONARQUBE_POSTGRES_PASSWORD}
-        - sonar.jdbc.url=jdbc:postgresql://${SONARQUBE_POSTGRES_HOST}:5432/${SONARQUBE_POSTGRES_DB}
-      networks:
-        - backend
-        - frontend
 
 ### SWAGGER EDITOR #######################################
     swagger-editor:

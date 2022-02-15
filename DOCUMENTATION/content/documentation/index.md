@@ -386,30 +386,6 @@ PHP_FPM_INSTALL_PHPDBG=true
 
 
 <br>
-<a name="Install-ionCube-Loader"></a>
-## Install ionCube Loader
-
-1 - First install `ionCube Loader` in the Workspace and the PHP-FPM Containers:
-<br>
-a) open the `.env` file
-<br>
-b) search for the `WORKSPACE_INSTALL_IONCUBE` argument under the Workspace Container
-<br>
-c) set it to `true`
-<br>
-d) search for the `PHP_FPM_INSTALL_IONCUBE` argument under the PHP-FPM Container
-<br>
-e) set it to `true`
-
-2 - Re-build the containers `docker-compose build workspace php-fpm`
-
-Always download the latest version of [Loaders for ionCube ](http://www.ioncube.com/loaders.php).
-
-
-
-
-
-<br>
 <a name="Install-Deployer"></a>
 ## Install Deployer
 
@@ -1661,25 +1637,6 @@ To install BBC Audio Waveform Image Generator in the Workspace container
 
 **PS** Don't forget to install the binary in the `php-fpm` container too by applying the same steps above to its container, otherwise you'll get an error when running the `audiowaveform` binary.
 
-
-<br>
-<a name="Install-wkhtmltopdf"></a>
-## Install wkhtmltopdf
-
-[wkhtmltopdf](https://wkhtmltopdf.org/) is a utility for outputting a PDF from HTML
-
-To install wkhtmltopdf in the Workspace container
-
-1 - Open the `.env` file
-
-2 - Search for the `WORKSPACE_INSTALL_WKHTMLTOPDF` argument under the Workspace Container and set it to `true`
-
-3 - Re-build the container `docker-compose build workspace`
-
-**PS** Don't forget to install the binary in the `php-fpm` container too by applying the same steps above to its container, otherwise the you'll get an error when running the `wkhtmltopdf` binary.
-
-
-
 <br>
 <a name="Install-GNU-Parallel"></a>
 ## Install GNU Parallel
@@ -1817,52 +1774,6 @@ will set the clock back 1 day. See (https://github.com/wolfcw/libfaketime) for m
 5 - Set it to the desired string
 <br>
 6 - Re-build the containers `docker-compose build php-fpm`<br>
-
-
-
-
-<br>
-<a name="Install-YAML"></a>
-## Install YAML extension in php-fpm
-
-YAML PHP extension allows you to easily parse and create YAML structured data. I like YAML because it's well readable for humans. See http://php.net/manual/en/ref.yaml.php and http://yaml.org/ for more info.
-
-1 - Open the `.env` file
-<br>
-2 - Search for the `PHP_FPM_INSTALL_YAML` argument under the PHP-FPM container
-<br>
-3 - Set it to `true`
-<br>
-4 - Re-build the container `docker-compose build php-fpm`<br>
-
-
-<br>
-<a name="Install-RDKAFKA-php"></a>
-## Install RDKAFKA extension in php-fpm
-
-1 - Open the `.env` file
-<br>
-2 - Search for the `PHP_FPM_INSTALL_RDKAFKA` argument under the PHP-FPM container
-<br>
-3 - Set it to `true`
-<br>
-4 - Re-build the container `docker-compose build php-fpm`<br>
-
-
-<br>
-<a name="Install-RDKAFKA-workspace"></a>
-## Install RDKAFKA extension in workspace
-
-This is needed for 'composer install' if your dependencies require Kafka.
-
-1 - Open the `.env` file
-<br>
-2 - Search for the `WORKSPACE_INSTALL_RDKAFKA` argument under the WORKSPACE container
-<br>
-3 - Set it to `true`
-<br>
-4 - Re-build the container `docker-compose build workspace`<br>
-
 
 <br>
 <a name="Install-AST"></a>

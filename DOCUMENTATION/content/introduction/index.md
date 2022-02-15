@@ -129,7 +129,6 @@ That's it! enjoy :)
          - `SOAP` 
          - `Drush` 
          - `Wordpress CLI`
-    - Apache ZooKeeper *(Centralized service for distributed systems to a hierarchical key-value store)*
     - Kibana *(Visualize your Elasticsearch data and navigate the Elastic Stack)*
     - Swoole *(Production-Grade Async programming Framework for PHP)* 
     - SonarQube *(continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs and more)* 

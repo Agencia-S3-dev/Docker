@@ -241,29 +241,6 @@ RUN if [ ${INSTALL_MONGO} = true ]; then \
     fi
 
 ###########################################################################
-# YAML: extension
-###########################################################################
-
-ARG INSTALL_YAML=false
-
-RUN if [ ${INSTALL_YAML} = true ]; then \
-     apk --update add -U --no-cache --virtual temp yaml-dev \
-     && apk add --no-cache yaml \
-     && docker-php-source extract; \
-      if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
-        pecl install yaml-1.3.2; \
-      elif [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ] && [ $(php -r "echo PHP_MINOR_VERSION;") = "0" ]; then \
-        pecl install yaml-2.0.4; \
-      else \
-        pecl install yaml; \
-      fi \
-     && docker-php-ext-enable yaml \
-     && pecl clear-cache \
-     && docker-php-source delete \
-     && apk del temp \
-;fi
-
-###########################################################################
 # PHP Memcached:
 ###########################################################################
 
