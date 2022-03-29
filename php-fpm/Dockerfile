@@ -822,6 +822,26 @@ RUN if [ ${DOWNGRADE_OPENSSL_TLS_AND_SECLEVEL} = true ]; then \
 
 RUN set -xe; php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 
+
+###########################################################################
+# Customizations:
+###########################################################################
+
+RUN apt-get install git cmake -y && \
+    git clone https://github.com/nu-book/zxing-cpp.git && \
+    mkdir /usr/lib/zxing-cpp/ && \
+    cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -G "Unix Makefiles" -S zxing-cpp/ -B /usr/lib/zxing-cpp/ && \
+    cd /usr/lib/zxing-cpp/ && \
+    make install
+
+RUN apt-get install zbar-tools -y
+
+RUN apt-get install poppler-utils -y
+
+RUN apt-get install default-jre -y
+
+RUN apt-get install tesseract-ocr tesseract-ocr-por -y
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
